@@ -1,226 +1,429 @@
 # Importing a few necessary libraries
-
 import numpy as np
-
 import math  as math
-
 import pandas as pd
-
-import matplotlib.pyplot as pl
-
-from sklearn import datasets
-
-from sklearn.tree import DecisionTreeRegressor
-
-from sklearn.feature_selection import SelectPercentile
-
-from sklearn.feature_selection import SelectKBest
-
-from sklearn.feature_selection import f_regression
-
-from sklearn import cross_validation
-
 from sklearn import linear_model
-
 from sklearn import preprocessing
-
-
 
 from IPython.display import display
 
-
-
-in_file = 'G:/onedrive/document/study/Udaicity/kaggle/data/train.csv'
+in_file = 'D:/python/Udacity/Kaggle/data/train.csv'
 
 full_data = pd.read_csv(in_file)
+sample_outcome = pd.read_csv('D:/python/Udacity/Kaggle/data/sample_submission.csv')
+sample_test = pd.read_csv('D:/python/Udacity/Kaggle/data/test.csv')
 
-
-
+display(sample_outcome.head())
+display(sample_test.head())
 display(full_data.head())
 
+# PREPROCESSING CATEGORICAL DATA
 
-
-#variable selection
-
-
-
-housing_features.shape
-
-selector=SelectPercentile(f_regression)
-
-selector.fit_transform(housing_features,housing_prices)
-
-score=-np.log10(selector.pvalues_)
-
-all_score=np.random.rand(2,len(score))
-
-all_score[0][:]=-np.log10(selector.pvalues_)
-
-all_score[1][:]=np.arange(0,len(score),1)
-
-all_score_trans=all_score.transpose()
-
-E_avg_rec=1000000.0
-
-bestpoly=0
-
-bestalpha=0.0
-
-E_avg_in=0
-
-alpha_power_list = np.arange(-5,5,0.01)
-
-alpha_select_list=[math.exp(alpha_select_list) for alpha_select_list in alpha_power_list]
-
-for featuren in range(1,14):
-
-    #n feature want to keep
-
-    #featuren=13
-
-
-
-    housing_features_new=SelectKBest(f_regression,k=featuren).fit_transform(housing_features,housing_prices)
-
-
-
-    #Regression Model with Ridge Regularization
-
-    #10-fold Cross Validation Involved
-
-    #selection of Polynomial
-
-    #selection of regularization alpha
-
-
-
-    foldern=10
-
-    polyn=0
-
-    for maxpoly in range(1,4):
-
-        if math.factorial(maxpoly+featuren-1)/(math.factorial(maxpoly)*math.factorial(featuren-1)) >= len(housing_prices)/2 and math.factorial(maxpoly+featuren-2)/(math.factorial(maxpoly-1)*math.factorial(featuren-1)) <= len(housing_prices)/2:
-
-            polyn=maxpoly-1
-
-    if polyn==0:
-
-        polyn=3
-
-    E_out=np.zeros((polyn,len(alpha_select_list),foldern),dtype=float)
-
-    E_in =np.zeros((polyn,len(alpha_select_list),foldern),dtype=float)
-
-    for k in range(1,polyn+1):
-
-        if k == 1:
-
-            housing_features_poly=housing_features_new
-
+# EXTRACT MORE FEATURE FROM CURRENT DATA
+new_features = pd.DataFrame(
+    columns=['is_mix', 'AnimalID', 'breed_abbrev', 'is_no_name', 'days', 'neutered', 'color1', 'color2', 'year',
+             'quarter', 'month', 'dayofweek'])
+for index, row in full_data.iterrows():
+    tempstr = row['Breed']
+    tempid = row['AnimalID']
+    tempbreed = pd.Series(row['Breed']).str.replace('Mix', '').str.strip()[0]
+    if pd.isnull(row['AgeuponOutcome']):
+        tempdays = np.nan
+    else:
+        tempdate = pd.Series(row['AgeuponOutcome']).str.split(' ')[0]
+        if tempdate[1] in ('year', 'years'):
+            tempdays = int(float(tempdate[0])) * 365
+        elif tempdate[1] in ('week', 'weeks'):
+            tempdays = int(float(tempdate[0])) * 7
+        elif tempdate[1] in ('month', 'months'):
+            tempdays = int(float(tempdate[0])) * 30
+        elif tempdate[1] in ('days', 'day'):
+            tempdays = int(float(tempdate[0])) * 1
         else:
+            tempdays = int(float(tempdate[0]))
+    if pd.isnull(row['Name']):
+        is_no_name = 1
+    else:
+        is_no_name = 0
+    if pd.isnull(row['SexuponOutcome']):
+        tempneutered = 0
+    else:
+        if pd.Series(row['SexuponOutcome']).str.split(' ')[0][0] == 'Intact':
+            tempneutered = 0
+        else:
+            tempneutered = 1
+    # extract more color:
+    if pd.isnull(row['Color']):
+        tempcolor1 = np.nan
+        tempcolor2 = np.nan
+    else:
+        if pd.Series(row['Color']).str.split('/').count() > 1:
+            tempcolor1 = pd.Series(row['Color']).str.split('/')[0][0]
+            tempcolor2 = pd.Series(row['Color']).str.split('/')[0][1]
+        else:
+            tempcolor1 = pd.Series(row['Color']).str.split('/')[0][0]
+            tempcolor2 = np.nan
+    # proccess datetime to year quarter month weekdays
+    if pd.isnull(row['DateTime']):
+        tempyear, tempquarter, tempmonth, tempdayofweek = np.nan, np.nan, np.nan, np.nan
+    else:
+        tempyear = pd.to_datetime(row['DateTime']).year
+        tempquarter = pd.to_datetime(row['DateTime']).quarter
+        tempmonth = pd.to_datetime(row['DateTime']).month
+        tempdayofweek = pd.to_datetime(row['DateTime']).dayofweek
+    if pd.Series(tempstr).str.contains('Mix')[0]:
+        new_features = new_features.append(
+            pd.DataFrame([[1, tempid, tempbreed, is_no_name, tempdays, tempneutered, tempcolor1, tempcolor2, tempyear,
+                           tempquarter, tempmonth, tempdayofweek]],
+                         columns=['is_mix', 'AnimalID', 'breed_abbrev', 'is_no_name', 'days', 'neutered', 'color1',
+                                  'color2', 'year', 'quarter', 'month', 'dayofweek']))
+    else:
+        new_features = new_features.append(
+            pd.DataFrame([[0, tempid, tempbreed, is_no_name, tempdays, tempneutered, tempcolor1, tempcolor2, tempyear,
+                           tempquarter, tempmonth, tempdayofweek]],
+                         columns=['is_mix', 'AnimalID', 'breed_abbrev', 'is_no_name', 'days', 'neutered', 'color1',
+                                  'color2', 'year', 'quarter', 'month', 'dayofweek']))
 
-            poly=preprocessing.PolynomialFeatures(k)
+max_string_value = int(float(new_features[['days']].mean(skipna=True, axis=0)))
+new_features['days'].fillna(max_string_value, inplace=True)
 
-            housing_features_poly=poly.fit_transform(housing_features_new)
+new_features.index = range(len(new_features))
+new_full_data = pd.merge(full_data, new_features, on='AnimalID')
 
-        kf=cross_validation.KFold(len(housing_features_poly), n_folds=foldern)
+# DUPLICATES FOR BIAS DATA
+pd.Series(new_full_data['OutcomeType']).value_counts(dropna=False)
 
-        i=0
+df_adoption = new_full_data[new_full_data.OutcomeType == 'Adoption']
+df_transfer = new_full_data[new_full_data.OutcomeType == 'Transfer']
+df_return = new_full_data[new_full_data.OutcomeType == 'Return_to_owner']
+df_Euthanasia = new_full_data[new_full_data.OutcomeType == 'Euthanasia']
+df_Died = new_full_data[new_full_data.OutcomeType == 'Died']
+df_nan = new_full_data[new_full_data.OutcomeType == 'NaN']
 
-        for alpha_select in alpha_select_list:
+new_full_data_final = pd.DataFrame(columns=[list(new_full_data.columns.values)])
+new_full_data_final = new_full_data_final.append([df_adoption] * int(float(len(new_full_data) / len(df_adoption))),
+                                                 ignore_index=True)
+new_full_data_final = new_full_data_final.append([df_transfer] * int(float(len(new_full_data) / len(df_transfer))),
+                                                 ignore_index=True)
+new_full_data_final = new_full_data_final.append([df_return] * int(float(len(new_full_data) / len(df_return))),
+                                                 ignore_index=True)
+new_full_data_final = new_full_data_final.append([df_Euthanasia] * int(float(len(new_full_data) / len(df_Euthanasia))),
+                                                 ignore_index=True)
+new_full_data_final = new_full_data_final.append([df_Died] * int(float(len(new_full_data) / len(df_Died))),
+                                                 ignore_index=True)
 
-            j=0
+new_full_data_final = new_full_data
 
-            for train, test in kf:
+# RANDOM SHUFFLE DATA
+new_full_data_final = new_full_data_final.iloc[np.random.permutation(len(new_full_data_final))]
 
-                X_train, X_test, Y_train, Y_test = housing_features_poly[train], housing_features_poly[test], housing_prices[train], housing_prices[test]
+new_full_data_final.index = range(len(new_full_data_final))
 
-                #Fitting use Ridge regression model
+# TRANSFORM CATEGORICAL VALUE TO DUMMY
+full_data_processed = new_full_data_final[
+    ['AnimalType', 'SexuponOutcome', 'AgeuponOutcome', 'Color', 'is_mix', 'breed_abbrev', 'is_no_name', 'days',
+     'neutered', 'year', 'quarter', 'month', 'dayofweek', 'color1', 'color2']]
 
-                clf = linear_model.Ridge (alpha = alpha_select)
+for column in new_full_data_final:
+    if column in ('AnimalType', 'SexuponOutcome', 'breed_abbrev', 'color1', 'color2', 'AgeuponOutcome'):
+        new_col = pd.get_dummies(new_full_data_final[column], prefix=column, dummy_na=True)
+        full_data_processed = pd.concat([full_data_processed, new_col], axis=1)
 
-                clf.fit(X_train, Y_train)
+new_out_cate = pd.DataFrame(columns=['out_cate'])
+for index, row in new_full_data_final.iterrows():
+    tempid = row['AnimalID']
+    if row['OutcomeType'] == 'Adoption':
+        tempcate = 1
+    elif row['OutcomeType'] == 'Transfer':
+        tempcate = 2
+    elif row['OutcomeType'] == 'Return_to_owner':
+        tempcate = 3
+    elif row['OutcomeType'] == 'Euthanasia':
+        tempcate = 4
+    elif row['OutcomeType'] == 'Died':
+        tempcate = 5
+    else:
+        tempcate = 0
+    new_out_cate = new_out_cate.append(pd.DataFrame([[tempcate]],
+                                                    columns=['out_cate']))
 
-                E_in[k-1][i][j] =np.dot((Y_train-clf.predict(X_train)),(Y_train-clf.predict(X_train)).transpose())/len(Y_train)
+new_out_cate.index = range(len(new_out_cate))
 
-                E_out[k-1][i][j]=np.dot((Y_test-clf.predict(X_test)),(Y_test-clf.predict(X_test)).transpose())/len(Y_test)
+target = pd.get_dummies(new_out_cate['out_cate'], prefix=column, dummy_na=True)
+target_combine = new_out_cate['out_cate']
 
-                j+=1
+# target=pd.get_dummies(new_full_data_final['OutcomeType'], dummy_na=True)
+full_data_processed.drop(
+    ['AnimalType', 'SexuponOutcome', 'AgeuponOutcome', 'breed_abbrev', 'Color', 'color1', 'color2'],
+    axis=1, inplace=True)
 
-            #searching for best model
+# display(full_data_processed.head())
+print('finished training data')
 
-            #print(k,",",i,",:",np.mean(E_out[k-1][i][:]))
+# PROCCESS DATA FOR TEST
+new_features_test = pd.DataFrame(
+    columns=['is_mix', 'ID', 'breed_abbrev', 'is_no_name', 'days', 'neutered', 'color1', 'color2', 'year',
+             'quarter', 'month', 'dayofweek'])
+for index, row in sample_test.iterrows():
+    tempstr = row['Breed']
+    tempid = row['ID']
+    tempbreed = pd.Series(row['Breed']).str.replace('Mix', '').str.strip()[0]
+    if pd.isnull(row['AgeuponOutcome']):
+        tempdays = 0
+    else:
+        tempdate = pd.Series(row['AgeuponOutcome']).str.split(' ')[0]
+        if tempdate[1] in ('year', 'years'):
+            tempdays = int(float(tempdate[0])) * 365
+        elif tempdate[1] in ('week', 'weeks'):
+            tempdays = int(float(tempdate[0])) * 7
+        elif tempdate[1] in ('month', 'months'):
+            tempdays = int(float(tempdate[0])) * 30
+        elif tempdate[1] in ('days', 'day'):
+            tempdays = int(float(tempdate[0])) * 1
+        else:
+            tempdays = int(float(tempdate[0]))
+    if pd.isnull(row['Name']):
+        is_no_name = 1
+    else:
+        is_no_name = 0
+    if pd.isnull(row['SexuponOutcome']):
+        tempneutered = 0
+    else:
+        if pd.Series(row['SexuponOutcome']).str.split(' ')[0][0] == 'Intact':
+            tempneutered = 0
+        else:
+            tempneutered = 1
+    # extract more color:
+    if pd.isnull(row['Color']):
+        tempcolor1 = np.nan
+        tempcolor2 = np.nan
+    else:
+        if pd.Series(row['Color']).str.split('/').count() > 1:
+            tempcolor1 = pd.Series(row['Color']).str.split('/')[0][0]
+            tempcolor2 = pd.Series(row['Color']).str.split('/')[0][1]
+        else:
+            tempcolor1 = pd.Series(row['Color']).str.split('/')[0][0]
+            tempcolor2 = np.nan
+    # proccess datetime to year quarter month weekdays
+    if pd.isnull(row['DateTime']):
+        tempyear, tempquarter, tempmonth, tempdayofweek = np.nan, np.nan, np.nan, np.nan
+    else:
+        tempyear = pd.to_datetime(row['DateTime']).year
+        tempquarter = pd.to_datetime(row['DateTime']).quarter
+        tempmonth = pd.to_datetime(row['DateTime']).month
+        tempdayofweek = pd.to_datetime(row['DateTime']).dayofweek
+    if pd.Series(tempstr).str.contains('Mix')[0]:
+        new_features_test = new_features_test.append(
+            pd.DataFrame([[1, tempid, tempbreed, is_no_name, tempdays, tempneutered, tempcolor1, tempcolor2, tempyear,
+                           tempquarter, tempmonth, tempdayofweek]],
+                         columns=['is_mix', 'ID', 'breed_abbrev', 'is_no_name', 'days', 'neutered', 'color1',
+                                  'color2', 'year', 'quarter', 'month', 'dayofweek']))
+    else:
+        new_features_test = new_features_test.append(
+            pd.DataFrame([[0, tempid, tempbreed, is_no_name, tempdays, tempneutered, tempcolor1, tempcolor2, tempyear,
+                           tempquarter, tempmonth, tempdayofweek]],
+                         columns=['is_mix', 'ID', 'breed_abbrev', 'is_no_name', 'days', 'neutered', 'color1',
+                                  'color2', 'year', 'quarter', 'month', 'dayofweek']))
 
-            print("Feature number:",featuren,", Polynomial:",k,", Alpha:",alpha_select,", E_out:",np.mean(E_out[k-1][i][:]))
+max_string_value = int(float(new_features_test[['days']].mean(skipna=True, axis=0)))
+new_features_test['days'].fillna(max_string_value, inplace=True)
 
-            if E_avg_rec > np.mean(E_out[k-1][i][:]):
+new_features_test.index = range(len(new_features_test))
+test_data_id = new_features_test[['ID']]
+test_data_id['ID'].astype(int)
 
-                bestfeaturen=featuren
+new_test_data = pd.merge(sample_test, new_features_test, on='ID')
 
-                bestpoly = k
+# TRANSFORM CATEGORICAL VALUE TO DUMMY
+test_data_processed = new_test_data[
+    ['AnimalType', 'SexuponOutcome', 'AgeuponOutcome', 'Color', 'is_mix', 'breed_abbrev', 'is_no_name', 'days',
+     'neutered', 'year', 'quarter', 'month', 'dayofweek', 'color1', 'color2']]
 
-                bestalpha = alpha_select
+for column in new_test_data:
+    if column in ('AnimalType', 'SexuponOutcome', 'breed_abbrev', 'AgeuponOutcome', 'color1', 'color2'):
+        new_col = pd.get_dummies(new_test_data[column], prefix=column, dummy_na=True)
+        test_data_processed = pd.concat([test_data_processed, new_col], axis=1)
 
-                E_avg_rec = np.mean(E_out[k-1][i][:])
+test_data_processed.drop(
+    ['AnimalType', 'SexuponOutcome', 'AgeuponOutcome', 'breed_abbrev', 'Color', 'color1', 'color2'],
+    axis=1, inplace=True)
 
-                E_avg_in  = np.mean(E_in[k-1][i][:])
+# display(test_data_processed.head())
+print('finished test data')
 
-            i+=1
+# ADD COLUMNS WHICH DO NOT EXIST IN TEST DATA
 
+for column in full_data_processed:
+    if column not in test_data_processed:
+        test_data_processed[column] = 0
 
+for column in test_data_processed:
+    if column not in full_data_processed:
+        test_data_processed.drop([column], axis=1, inplace=True)
 
-print("Feature number:",bestfeaturen,", Best Polynomial:",bestpoly,", Best Alpha:",bestalpha,", E_out:",E_avg_rec,", E_in:",E_avg_in)
+test_data_processed.shape
+full_data_processed.shape
 
+# REORDER COLUMNS
+cols = list(full_data_processed.columns.values)
+test_data_processed = test_data_processed[cols]
 
+print('finished clean featuers')
 
-#fit the selected model with full data
-
-best_model = linear_model.Ridge (alpha = bestalpha)
-
-poly=preprocessing.PolynomialFeatures(bestpoly)
-
-housing_features_new=SelectKBest(f_regression,k=bestfeaturen).fit_transform(housing_features,housing_prices)
-
-housing_features_poly=poly.fit_transform(housing_features_new)
-
-best_model.fit(housing_features_poly, housing_prices)
-
-best_model.score(housing_features_poly, housing_prices)
-
-print(best_model.score(housing_features_poly, housing_prices))
-
-E_in_best=np.dot((housing_prices-best_model.predict(housing_features_poly)),(housing_prices-best_model.predict(housing_features_poly)).transpose())/len(housing_prices)
-
-print(E_in_best)
-
-
-
-
-
-#Process the Prediction Data
-
-best_feature_index=list(all_score_trans[all_score_trans[:,0].argsort()][:][(len(all_score_trans)-bestfeaturen):][:,1].astype(int))
-
-best_client_feature=np.array(CLIENT_FEATURES[0])[sorted(best_feature_index)]
-
-print(best_client_feature)
-
-best_client_feature_poly=poly.fit_transform(best_client_feature)
-
-print(best_client_feature_poly)
+# RANDOM FOREST
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import grid_search
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_regression
 
 
+randomforest = RandomForestClassifier(random_state=24, n_estimators=100)
 
-#Prediction
+# USE MSE AS SCORE FUNCTION
+from sklearn.metrics import make_scorer, mean_squared_error, f1_score, accuracy_score
 
-best_model.predict(best_client_feature_poly)
+# tree_score= make_scorer(output_restric ,greater_is_better=False)
+tree_score = make_scorer(accuracy_score, greater_is_better=True)
+
+score_record = pd.DataFrame(columns=['feature_num', 'max_depth', 'min_samples_split', 'score'])
+for feature_number in range(30, 100):
+    parameters = {'max_depth': [x for x in range(3, feature_number+1)], 'min_samples_split': [x * 10 for x in range(2, 10)]}
+    full_data_processed_new = SelectKBest(f_regression, k=feature_number).fit_transform(full_data_processed,
+                                                                                        target_combine)
+    clf = grid_search.GridSearchCV(estimator=randomforest, param_grid=parameters, cv=10, scoring=tree_score)
+    clf.fit(full_data_processed_new, target_combine)
+    score_record = score_record.append(
+        pd.DataFrame([[feature_number, clf.best_estimator_.max_depth, clf.best_estimator_.min_samples_split,
+                       clf.best_score_]],
+                     columns=['feature_num', 'max_depth', 'min_samples_split', 'score']))
 
 
+score_record[score_record.score == score_record.score.max()]
+best_estimation = score_record[score_record.score == score_record.score.max()]
 
 
+print("best parameter", best_estimation.max_depth[0])
+print("best score", best_estimation.score[0])
+
+print('finished modeling')
+
+full_data_processed_new = SelectKBest(f_regression, k=best_estimation.feature_num[0]).fit_transform(full_data_processed,
+                                                                                                    target_combine)
+
+randomforest = RandomForestClassifier(max_depth=best_estimation.max_depth[0],random_state=24, n_estimators=100)
+parameters = {'min_samples_split': [x * 10 for x in range(2, 10)]}
+clf = grid_search.GridSearchCV(estimator=randomforest, param_grid=parameters, cv=10, scoring=tree_score)
+clf.fit(full_data_processed_new, target_combine)
+print('best score', clf.best_score_)
+print('best depth', best_estimation.max_depth[0])
+print('best sample split', clf.best_estimator_.min_samples_split)
+print('best feature', best_estimation.feature_num[0])
+
+finalRF = RandomForestClassifier(max_depth=best_estimation.max_depth[0],
+                                 min_samples_split=clf.best_estimator_.min_samples_split, n_estimators=1000,
+                                 random_state=24)
+
+# finalRF = RandomForestClassifier(max_depth=62,
+#                                  min_samples_split=90, n_estimators=1000,
+#                                  random_state=24)
+full_data_processed_new = SelectKBest(f_regression, k=best_estimation.feature_num[0]).fit_transform(full_data_processed,
+                                                                                                 target_combine)
+
+finalRF.fit(full_data_processed_new, target_combine)
+
+accuracy_score(target_combine, finalRF.predict(full_data_processed_new))
 
 
+#PROCESS TEST DATA
+feature_index = SelectKBest(f_regression, k=best_estimation.feature_num[0]).fit(full_data_processed, target_combine)
+test_data_processed_new = feature_index.transform(test_data_processed)
+
+predicted_value = finalRF.predict_proba(test_data_processed_new)
+
+predicted_value_pd = pd.DataFrame(np.array(predicted_value[:, 0]).transpose(), columns=['Adoption'])
+predicted_value_pd['Transfer'] = pd.DataFrame(np.array(predicted_value[:, 1]).transpose())
+predicted_value_pd['Return_to_owner'] = pd.DataFrame(np.array(predicted_value[:, 2]).transpose())
+predicted_value_pd['Euthanasia'] = pd.DataFrame(np.array(predicted_value[:, 3]).transpose())
+predicted_value_pd['Died'] = pd.DataFrame(np.array(predicted_value[:, 4]).transpose())
+
+test = np.array(predicted_value[:, 1])
+
+predicted_value_pd.index = range(len(predicted_value_pd))
+
+predicted_value_pd = predicted_value_pd[['Adoption', 'Died', 'Euthanasia', 'Return_to_owner', 'Transfer']]
+
+test_data_id = test_data_id[['ID']].astype(int)
+predicted_value_pd = pd.concat([test_data_id, predicted_value_pd], axis=1)
+predicted_value_pd.dtypes
+
+predicted_value_pd.to_csv('D:/python/Udacity/Kaggle/data/output_result.csv', index=False)
+
+print('final finished')
+
+# CHANGE TO USE ADABOOST
 
 
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import grid_search
 
+parameters = {'n_estimators': [x * 100 for x in range(1, 5)], 'learning_rate': [x * 0.1 for x in range(1, 11)]}
+adaboost = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=3), random_state=42)
+
+# USE MSE AS SCORE FUNCTION
+from sklearn.metrics import make_scorer, mean_squared_error, accuracy_score
+
+# tree_score= make_scorer(output_restric ,greater_is_better=False)
+tree_score = make_scorer(accuracy_score, greater_is_better=True)
+
+adaboostgs = grid_search.GridSearchCV(estimator=adaboost, param_grid=parameters, cv=5, scoring=tree_score)
+adaboostgs.fit(full_data_processed, target)
+
+mean_squared_error(target, adaboostgs.predict(full_data_processed))
+accuracy_score(target, adaboostgs.predict(full_data_processed))
+
+print("best parameter", adaboostgs.best_estimator_)
+print("best score", adaboostgs.best_score_)
+print("Accuracy: ", accuracy_score(target, adaboostgs.predict(full_data_processed)))
+
+print('finished modeling')
+
+# finalAdaB = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=3),
+#                              n_estimators=adaboostgs.best_estimator_.n_estimators,
+#                              learning_rate=adaboostgs.best_estimator_.learning_rate,
+#                              random_state=42)
+
+finalAdaB = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=3),
+                               n_estimators=100,
+                               learning_rate=0.2,
+                               random_state=42)
+
+finalAdaB.fit(full_data_processed, target)
+
+mean_squared_error(target, finalAdaB.predict(full_data_processed))
+
+predicted_value = pd.get_dummies(finalRF.predict(test_data_processed), dummy_na=True)
+predicted_value.columns = ['Adoption', 'Transfer', 'Return_to_owner', 'Euthanasia', 'NAN']
+predicted_value['Died'] = 0
+
+predicted_value = predicted_value[['Adoption', 'Died', 'Euthanasia', 'Return_to_owner', 'Transfer', 'NAN']]
+
+predicted_value_pd = pd.concat([test_data_id, predicted_value], axis=1)
+predicted_value_pd.drop(['NAN'], axis=1, inplace=True)
+
+print('final finished')
+
+#  OUTPUT TO CSV
+
+import csv
+import re
+
+f = open('D:/python/Udacity/Kaggle/data/output_result.csv', 'w', newline='\n')
+writer = csv.writer(f)
+writer.writerow(list(predicted_value_pd.columns.values))
+for index, row in predicted_value_pd.iterrows():
+    writer.writerow(row)
+f.close()
+# print ('finished')
+
+print('output finish')
