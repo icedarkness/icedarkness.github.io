@@ -1,0 +1,28 @@
+@import url('style.css');
+
+:root {
+
+/*---IMAGE SETTINGS----*/
+    --image: url("https://icedarkness.github.io/roamstyle/sama_viirs.jpg");  
+    --image-position: 45%;
+    --image-gradient: rgba(0,0,0,0.15), rgba(0,0,0,0.28);
+    --image-filter: saturate(1.5) contrast(1.02) !important;
+  
+/*---LIGHT MODE----*/
+    --primary-color: #0062ae !important;
+    --primary-color-40: #0062ae40 !important;
+    --primary-color-33: #0062ae33 !important; 
+    --primary-color-72: #0062ae72 !important;
+}
+
+/*---DARK MODE----*/
+
+@media (prefers-color-scheme: dark) {
+  
+	:root {
+    	--primary-color: #4082e1 !important;
+    	--primary-color-40: #4082e140 !important;
+    	--primary-color-33: #4082e133 !important;  
+        --primary-color-72: #4082e172 !important;
+	}
+}
