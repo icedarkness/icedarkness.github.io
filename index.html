@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wen Zhang - Data Scientist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #10B981; /* Bright Green */
+            --background-color: #0F172A; /* Dark Navy */
+            --surface-color: #1E293B; /* Lighter Navy */
+            --text-color: #E0E0E0; /* Light Gray */
+            --text-secondary-color: #94A3B8; /* Dimmer Gray */
+            --border-color: #334155;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding-top: 70px;
+        }
+
+        .navbar {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #fff !important;
+        }
+
+        .nav-link {
+            color: var(--text-secondary-color) !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: auto;
+            padding: 0 15px;
+        }
+
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem; /* Reduced margin */
+            color: #fff;
+        }
+        
+        .hero .job-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary-color);
+            margin-bottom: 2rem;
+            max-width: 800px; /* Constrain width */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-decoration: none;
+        }
+        .btn:hover {
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0ca673;
+            border-color: #0ca673;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            color: #fff;
+            border-color: var(--border-color);
+        }
+
+        .btn-outline-light:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            color: #fff;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.75rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-secondary-color);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+        }
+        .skills-list li {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        .skills-list strong {
+            color: #fff;
+        }
+        
+        .experience-list {
+            list-style: none;
+            padding: 0;
+            position: relative;
+        }
+        .experience-list::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+        .experience-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 2.5rem;
+        }
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 2px solid var(--background-color);
+        }
+        .experience-item h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .experience-item .company {
+            color: var(--text-secondary-color);
+            font-weight: 500;
+        }
+        .experience-item .date {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .experience-item .summary {
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            background-color: var(--surface-color);
+            color: var(--text-secondary-color);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-section {
+            text-align: center;
+        }
+        .contact-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            color: var(--text-secondary-color);
+        }
+        .contact-section .email-link {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-section .email-link:hover {
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">Wen Zhang</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#experience">Experience</a>
+                <a class="nav-link" href="#skills">Skills</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Wen Zhang</h1>
+            <h2 class="job-title">Principal Data Scientist | Credit Risk & AI Specialist</h2>
+            <p class="lead">Leveraging 12+ years of expertise in advanced credit risk modeling with the power of modern Generative AI tools like Gemini and Claude to build innovative, high-performance financial solutions.</p>
+            <div class="mt-4">
+                <a href="https://www.linkedin.com/in/wenzhangdatascientist/" target="_blank" rel="noopener noreferrer" class="btn btn-primary me-2">LinkedIn</a>
+                <a href="https://github.com/icedarkness" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light me-2">GitHub</a>
+                <a href="Wen_Zhang_Principal_Data_Scientist_Resume.pdf" download class="btn btn-outline-light">Download Resume</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="card">
+                <p>
+                    I am a passionate Data Scientist with a deep background in the banking, specialty finance, and fintech sectors. My work focuses on transforming complex data into actionable insights that solve real-world problems. I specialize in developing and deploying robust predictive models, from FCRA-compliant credit risk systems to non-FCRA models for small business lending.
+                </p>
+                <p>
+                    I am highly skilled in modernizing legacy systems and automating analytics pipelines to enhance scalability and efficiency. My technical toolkit includes Python, SQL, SAS, and a variety of machine learning frameworks. I hold a Master of Science in Applied Statistics & Operational Research and am a certified Deep Learning specialist. I am driven by the challenge of finding elegant, data-driven solutions that improve decision-making and create a measurable impact.
+                </p>
+            </div>
+        </section>
+        
+        <section id="experience" class="section">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="experience-list">
+                <div class="experience-item">
+                    <h5>Data Scientist Specialist – Banking and Lending</h5>
+                    <p class="company">EQUIFAX, INC. | Las Vegas, Nevada</p>
+                    <p class="date">7/2024 to Present</p>
+                    <p class="summary">Developing credit risk models for fintech and subprime clients, streamlining processes to improve client outcomes and driving automation efforts.</p>
+                </div>
+                <div class="experience-item">
+                    <h5>Data Scientist Specialist – Specialty Finance</h5>
+                    <p class="company">EQUIFAX, INC. | Las Vegas, Nevada</p>
+                    <p class="date">7/2018 to 6/2024</p>
+                    <p class="summary">Delivered advanced analytics solutions and model automation to elevate client portfolios by integrating alternative data and optimizing credit scoring strategies.</p>
+                </div>
+                <div class="experience-item">
+                    <h5>Data Scientist II (Fraud / Underwriting)</h5>
+                    <p class="company">DATAX, LTD | Las Vegas, Nevada</p>
+                    <p class="date">3/2017 to 7/2018</p>
+                    <p class="summary">Focused on fraud and underwriting, partnering with lending clients to develop underwriting rule improvement strategies using Angoss decision trees.</p>
+                </div>
+                 <div class="experience-item">
+                    <h5>Data Scientist</h5>
+                    <p class="company">PARTNERWEEKLY, LLC | Las Vegas, Nevada</p>
+                    <p class="date">11/2012 to 3/2017</p>
+                    <p class="summary">Led machine learning initiatives to optimize financial services processes, reduce fraud risk, and collaborate with clients to enhance business performance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2 class="section-title">Skills</h2>
+            <ul class="skills-list">
+                <li><strong>Statistical Machine Learning:</strong> GBM (XGBoost), Random Forest, SVM, KNN, AdaBoost, LSTM, Logistic Regression</li>
+                <li><strong>Data Analytics:</strong> Data Mining & Validation, Big Data Analytics, ETL Processes, Credit Scoring</li>
+                <li><strong>Risk Modeling:</strong> Predictive Risk Modeling, Financial Risk Modeling, Fraud Detection & Prevention</li>
+                <li><strong>Optimization Methods:</strong> Stochastic Processes, Linear Programming, Multi-Objective Optimization (NSGA-II)</li>
+                <li><strong>Programming & Tools:</strong> Python, SQL, SAS, Angoss</li>
+                <li><strong>Certifications:</strong> Deep Learning Specialization</li>
+            </ul>
+        </section>
+
+        <section id="projects" class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+                
+                <div class="card">
+                    <h5 class="card-title">Lending Club Credit Risk Model with XAI</h5>
+                    <p class="card-text">This project demonstrates a complete, end-to-end workflow for building and interpreting a credit risk model on the Lending Club dataset.</p>
+                    <div>
+                        <span class="tech-badge">Python</span><span class="tech-badge">LightGBM</span><span class="tech-badge">SHAP</span><span class="tech-badge">Scikit-learn</span>
+                    </div>
+                    <a href="https://github.com/icedarkness/showcase/blob/main/Lending%20Club%20Credit%20Risk%20Model%20with%20XAI/Lending%20Club%20Credit%20Risk%20Model%20with%20XAI.ipynb" class="btn btn-primary mt-3" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-title">RAG-Powered Financial Chatbot</h5>
+                    <p class="card-text">This project features a web-based chatbot designed to answer user questions about a fictional bank's financial products using a RAG pipeline.</p>
+                    <div>
+                        <span class="tech-badge">RAG</span><span class="tech-badge">Gemini API</span><span class="tech-badge">FAISS</span><span class="tech-badge">HTML/CSS</span>
+                    </div>
+                    <a href="https://github.com/icedarkness/showcase/tree/main/RAG-Powered%20Financial%20Chatbot" class="btn btn-primary mt-3" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-title">German Credit Risk Model with XAI</h5>
+                    <p class="card-text">This project involves building a highly accurate classification model to predict credit risk using the well-known German Credit Data (Statlog) dataset.</p>
+                    <div>
+                        <span class="tech-badge">Python</span><span class="tech-badge">RandomForest</span><span class="tech-badge">SHAP</span><span class="tech-badge">Scikit-learn</span>
+                    </div>
+                    <a href="https://github.com/icedarkness/showcase/blob/main/German%20Credit%20Data%20(Statlog)/German_Credit_Data.ipynb" class="btn btn-primary mt-3" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-title">Customer Segmentation for Marketing</h5>
+                    <p class="card-text">This project showcases the use of unsupervised machine learning to drive business strategy by segmenting customers and proposing marketing strategies.</p>
+                    <div>
+                        <span class="tech-badge">Python</span><span class="tech-badge">K-Means</span><span class="tech-badge">Scikit-learn</span><span class="tech-badge">Seaborn</span>
+                    </div>
+                    <a href="https://github.com/icedarkness/showcase/blob/main/Customer%20Segmentation%20for%20Marketing/Customer%20Segmentation%20for%20Marketing.ipynb" class="btn btn-primary mt-3" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-title">Time-Series Forecasting of Loan Performance</h5>
+                    <p class="card-text">This project showcases time-series analysis and forecasting by building a model to predict future default volumes using Facebook's Prophet.</p>
+                    <div>
+                        <span class="tech-badge">Python</span><span class="tech-badge">Prophet</span><span class="tech-badge">Pandas</span><span class="tech-badge">Time-Series</span>
+                    </div>
+                    <a href="https://github.com/icedarkness/showcase/tree/main/Time-Series%20Forecasting%20of%20Loan%20Volume%20(SARIMA%20vs.%20Prophet)" class="btn btn-primary mt-3" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <h2 class="section-title">Get In Touch</h2>
+            <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team. Feel free to reach out.</p>
+            <a href="mailto:wen.zhang.ds@outlook.com" class="email-link">wen.zhang.ds@outlook.com</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Wen Zhang. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to make navbar background solid on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'var(--surface-color)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(15, 23, 42, 0.8)';
+            }
+        });
+    </script>
+
+</body>
+</html>
