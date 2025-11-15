@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wen Zhang - Principal Data Scientist</title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Inter Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Inter Font --><link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
@@ -22,8 +20,8 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'brand-primary': '#8B5CF6', // New: Vibrant Violet
-                        'brand-primary-hover': '#7C3AED', // New: Darker Violet
+                        'brand-primary': '#B73F4D', // NEW: Deep Red/Maroon from your dress
+                        'brand-primary-hover': '#A03845', // NEW: Slightly darker red
                         'brand-dark': '#0F172A', // Dark Navy from original
                         'brand-surface': '#1E293B', // Lighter Navy from original
                         'brand-text': '#E0E0E0', // Light Gray from original
@@ -51,27 +49,24 @@
         }
         
         body {
-            /* Add subtle radial gradients for a modern "glow" effect */
+            /* Adjusted radial gradients to match the new primary color */
             background-color: #0F172A; /* brand-dark */
             background-image: 
-                radial-gradient(at 0% 0%, hsla(252, 58%, 20%, 0.3) 0px, transparent 50%),
-                radial-gradient(at 90% 80%, hsla(252, 58%, 20%, 0.2) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(353, 58%, 20%, 0.3) 0px, transparent 50%), /* Adjusted hue for red */
+                radial-gradient(at 90% 80%, hsla(353, 58%, 20%, 0.2) 0px, transparent 50%); /* Adjusted hue for red */
         }
     </style>
 </head>
 <body class="text-brand-text font-sans antialiased">
 
-    <!-- Header & Navbar -->
-    <header class="sticky top-0 z-50 w-full backdrop-blur-lg bg-brand-dark/80 border-b border-brand-surface">
+    <!-- Header & Navbar --><header class="sticky top-0 z-50 w-full backdrop-blur-lg bg-brand-dark/80 border-b border-brand-surface">
         <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo / Name -->
-                <div class="flex-shrink-0">
+                <!-- Logo / Name --><div class="flex-shrink-0">
                     <a href="#" class="text-2xl font-bold text-white">Wen Zhang</a>
                 </div>
                 
-                <!-- Navigation Links -->
-                <div class="hidden sm:block">
+                <!-- Navigation Links --><div class="hidden sm:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-brand-text-secondary hover:text-white hover:bg-brand-surface transition-colors">About</a>
                         <a href="#experience" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-brand-text-secondary hover:text-white hover:bg-brand-surface transition-colors">Experience</a>
@@ -81,12 +76,10 @@
                     </div>
                 </div>
                 
-                <!-- Mobile Menu Button (Optional, not functional) -->
-                <div class="-mr-2 flex sm:hidden">
+                <!-- Mobile Menu Button (Optional, not functional) --><div class="-mr-2 flex sm:hidden">
                     <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-brand-text-secondary hover:text-white hover:bg-brand-surface focus:outline-none">
                         <span class="sr-only">Open main menu</span>
-                        <!-- Icon for menu -->
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <!-- Icon for menu --><svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
                     </button>
@@ -95,13 +88,10 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Main Content --><main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        <!-- Hero Section -->
-        <section id="hero" class="relative isolate py-24 sm:py-32 flex flex-col md:flex-row items-center justify-between gap-12">
-            <!-- Abstract Grid Background -->
-            <div class="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <!-- Hero Section --><section id="hero" class="relative isolate py-24 sm:py-32 flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Abstract Grid Background --><div class="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
                 <svg class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2" width="1200" height="800" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <pattern id="hero-pattern" width="64" height="64" patternUnits="userSpaceOnUse">
@@ -113,8 +103,7 @@
                 </svg>
             </div>
             
-            <!-- Text Content -->
-            <div class="md:w-3/5 text-center md:text-left">
+            <!-- Text Content --><div class="md:w-3/5 text-center md:text-left">
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white">
                     Wen Zhang
                 </h1>
@@ -128,8 +117,7 @@
                     Fusing 12+ years of deep experience in credit risk modeling with a modern AI-driven workflow, leveraging tools like Gemini and Claude to accelerate development and deliver high-impact financial solutions.
                 </p>
                 
-                <!-- Buttons & Links -->
-                <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+                <!-- Buttons & Links --><div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
                     <a href="https://www.linkedin.com/in/wenzhangdatascientist/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold bg-brand-primary text-white shadow-lg hover:bg-brand-primary-hover transform hover:-translate-y-0.5 transition-all">
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.75c0-1.2-.5-2-1.5-2s-1.5.8-1.5 2V19h-3v-9h3V8.75c0-3 1.75-4.75 4.5-4.75S19 5.75 19 8.75z"></path></svg>
                         LinkedIn
@@ -145,21 +133,19 @@
                 </div>
             </div>
             
-            <!-- Profile Image Placeholder -->
-            <div class="md:w-2/5 flex justify-center">
+            <!-- Profile Image --><div class="md:w-2/5 flex justify-center">
                 <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-brand-surface border-4 border-brand-primary shadow-2xl flex items-center justify-center overflow-hidden">
                     <img 
                         class="rounded-full w-full h-full object-cover"
                         src="wen.jpeg" 
                         alt="Wen Zhang - Profile Picture"
-                        onerror="this.src='https://placehold.co/400x400/1E293B/8B5CF6?text=Wen+Zhang'; this.onerror=null;"
+                        onerror="this.src='https://placehold.co/400x400/1E293B/B73F4D?text=Wen+Zhang'; this.onerror=null;"
                     >
                 </div>
             </div>
         </section>
 
-        <!-- About Me Section -->
-        <section id="about" class="py-24">
+        <!-- About Me Section --><section id="about" class="py-24">
             <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
                 About Me
                 <div class="title-underline"></div>
@@ -174,25 +160,17 @@
             </div>
         </section>
 
-        <!-- Work Experience Section -->
-        <section id="experience" class="py-24">
+        <!-- Work Experience Section --><section id="experience" class="py-24">
             <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
                 Work Experience
                 <div class="title-underline"></div>
             </h2>
-            <!-- REMOVED max-w-3xl and mx-auto from this div -->
             <div class="mt-12">
-                <!-- Timeline -->
-                <div class="relative space-y-8"> <!-- Reduced space -->
-                    <!-- Timeline Line -->
-                    <!-- Always-on left-aligned line, moved to left-0 (edge) -->
-                    <div class="absolute left-0 w-0.5 h-full bg-brand-surface -translate-x-1/2"></div>
+                <!-- Timeline --><div class="relative space-y-8">
+                    <!-- Timeline Line --><div class="absolute left-0 w-0.5 h-full bg-brand-surface -translate-x-1/2"></div>
                     
-                    <!-- Experience Item 1 -->
-                    <!-- ADDED pl-6 for padding from the line -->
-                    <div class="timeline-item pl-6">
+                    <!-- Experience Item 1 --><div class="timeline-item pl-6">
                         <div class="timeline-dot"></div>
-                        <!-- ADDED max-w-3xl to the content block for alignment -->
                         <div class="timeline-content max-w-3xl">
                             <span class="timeline-date">7/2024 to Present</span>
                             <h5 class="text-xl font-semibold text-white mt-1">Data Scientist Specialist – Banking and Lending</h5>
@@ -201,11 +179,8 @@
                         </div>
                     </div>
                     
-                    <!-- Experience Item 2 -->
-                    <!-- ADDED pl-6 for padding from the line -->
-                    <div class="timeline-item pl-6">
+                    <!-- Experience Item 2 --><div class="timeline-item pl-6">
                         <div class="timeline-dot"></div>
-                        <!-- ADDED max-w-3xl to the content block for alignment -->
                         <div class="timeline-content max-w-3xl">
                             <span class="timeline-date">7/2018 to 6/2024</span>
                             <h5 class="text-xl font-semibold text-white mt-1">Data Scientist Specialist – Specialty Finance</h5>
@@ -214,11 +189,8 @@
                         </div>
                     </div>
 
-                    <!-- Experience Item 3 -->
-                    <!-- ADDED pl-6 for padding from the line -->
-                    <div class="timeline-item pl-6">
+                    <!-- Experience Item 3 --><div class="timeline-item pl-6">
                         <div class="timeline-dot"></div>
-                        <!-- ADDED max-w-3xl to the content block for alignment -->
                         <div class="timeline-content max-w-3xl">
                             <span class="timeline-date">3/2017 to 7/2018</span>
                             <h5 class="text-xl font-semibold text-white mt-1">Data Scientist II (Fraud / Underwriting)</h5>
@@ -227,11 +199,8 @@
                         </div>
                     </div>
                     
-                    <!-- Experience Item 4 -->
-                    <!-- ADDED pl-6 for padding from the line -->
-                    <div class="timeline-item pl-6">
+                    <!-- Experience Item 4 --><div class="timeline-item pl-6">
                         <div class="timeline-dot"></div>
-                        <!-- ADDED max-w-3xl to the content block for alignment -->
                         <div class="timeline-content max-w-3xl">
                             <span class="timeline-date">11/2012 to 3/2017</span>
                             <h5 class="text-xl font-semibold text-white mt-1">Data Scientist</h5>
@@ -244,16 +213,14 @@
             </div>
         </section>
         
-        <!-- Skills Section -->
-        <section id="skills" class="py-24">
+        <!-- Skills Section --><section id="skills" class="py-24">
             <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
                 Skills
                 <div class="title-underline"></div>
             </h2>
             <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <!-- Core Data Science -->
-                <div class="bg-brand-surface rounded-xl shadow-2xl p-8">
+                <!-- Core Data Science --><div class="bg-brand-surface rounded-xl shadow-2xl p-8">
                     <h4 class="text-2xl font-bold text-white mb-6">Core Data Science</h4>
                     <ul class="space-y-4">
                         <li class="skill-item"><strong>Statistical Machine Learning:</strong> GBM (XGBoost), Random Forest, SVM, KNN, AdaBoost, LSTM, Logistic Regression</li>
@@ -263,8 +230,7 @@
                     </ul>
                 </div>
                 
-                <!-- Generative AI -->
-                <div class="bg-brand-surface rounded-xl shadow-2xl p-8">
+                <!-- Generative AI --><div class="bg-brand-surface rounded-xl shadow-2xl p-8">
                     <h4 class="text-2xl font-bold text-white mb-6">Generative AI & LLM Tooling</h4>
                     <ul class="space-y-4">
                         <li class="skill-item"><strong>AI-Powered Development:</strong> Using Gemini, Claude, and Cursor for efficient code generation, debugging, and workflow automation.</li>
@@ -276,16 +242,14 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="py-24">
+        <!-- Projects Section --><section id="projects" class="py-24">
             <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
                 Projects
                 <div class="title-underline"></div>
             </h2>
             <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Project Card 1 -->
-                <div class="project-card">
+                <!-- Project Card 1 --><div class="project-card">
                     <h5 class="text-xl font-semibold text-white">RAG-Powered Financial Chatbot</h5>
                     <p class="text-brand-text-secondary mt-3 mb-4">Built an intelligent chatbot to improve access to financial product information, leveraging a RAG pipeline to ensure accurate, source-grounded answers.</p>
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -294,8 +258,7 @@
                     <a href="https://github.com/icedarkness/showcase/tree/main/RAG-Powered%20Financial%20Chatbot" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
                 </div>
 
-                <!-- Project Card 2 -->
-                <div class="project-card">
+                <!-- Project Card 2 --><div class="project-card">
                     <h5 class="text-xl font-semibold text-white">Lending Club Credit Risk Model with XAI</h5>
                     <p class="text-brand-text-secondary mt-3 mb-4">Developed a complete credit risk model on the Lending Club dataset, with a strong focus on Explainable AI (XAI) to make complex model decisions transparent.</p>
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -304,8 +267,7 @@
                     <a href="https://github.com/icedarkness/showcase/blob/main/Lending%20Club%20Credit%20Risk%20Model%20with%20XAI/Lending%20Club%20Credit%20Risk%20Model%20with%20XAI.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
                 </div>
 
-                <!-- Project Card 3 -->
-                <div class="project-card">
+                <!-- Project Card 3 --><div class="project-card">
                     <h5 class="text-xl font-semibold text-white">German Credit Risk Model with XAI</h5>
                     <p class="text-brand-text-secondary mt-3 mb-4">Built a highly accurate classification model on the Statlog dataset, using SHAP for deep model interpretation and explaining the "why" behind individual predictions.</p>
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -314,8 +276,7 @@
                     <a href="https://github.com/icedarkness/showcase/blob/main/German%20Credit%20Data%20(Statlog)/German_Credit_Data.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
                 </div>
 
-                <!-- Project Card 4 -->
-                <div class="project-card">
+                <!-- Project Card 4 --><div class="project-card">
                     <h5 class="text-xl font-semibold text-white">Customer Segmentation for Marketing</h5>
                     <p class="text-brand-text-secondary mt-3 mb-4">Used K-Means clustering to segment customers and proposed actionable marketing strategies, demonstrating the use of unsupervised learning to drive business value.</p>
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -324,8 +285,7 @@
                     <a href="https://github.com/icedarkness/showcase/blob/main/Customer%20Segmentation%20for%20Marketing/Customer%20Segmentation%20for%20Marketing.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
                 </div>
 
-                <!-- Project Card 5 -->
-                <div class="project-card">
+                <!-- Project Card 5 --><div class="project-card">
                     <h5 class="text-xl font-semibold text-white">Time-Series Forecasting of Loan Performance</h5>
                     <p class="text-brand-text-secondary mt-3 mb-4">Forecasted monthly loan default volumes using Prophet, including trend and seasonality decomposition to provide clear, actionable insights for financial planning.</p>
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -337,8 +297,7 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-24">
+        <!-- Contact Section --><section id="contact" class="py-24">
             <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
                 Get In Touch
                 <div class="title-underline"></div>
@@ -355,8 +314,7 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-brand-surface border-t border-gray-700 mt-24">
+    <!-- Footer --><footer class="bg-brand-surface border-t border-gray-700 mt-24">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
             <p class="text-brand-text-secondary text-sm">
                 © 2025 Wen Zhang. All Rights Reserved.
@@ -364,19 +322,17 @@
         </div>
     </footer>
 
-    <!-- Custom CSS for components -->
-    <style>
+    <!-- Custom CSS for components --><style>
         .section-title .title-underline {
             width: 60px;
             height: 4px;
-            background-color: #8B5CF6; /* brand-primary */
+            background-color: #B73F4D; /* brand-primary - NEW RED */
             margin: 12px auto 0;
             border-radius: 2px;
         }
 
         /* Timeline styles */
         .timeline-item {
-            /* REMOVED @apply relative pl-8; */
             @apply relative; 
         }
         .timeline-item .timeline-content {
@@ -388,7 +344,7 @@
             @apply bg-brand-surface p-6 rounded-lg shadow-lg;
         }
         .timeline-item .timeline-dot {
-            /* Centered on the line at left-0 (was left-2), removed sm: prefixes */
+            /* Centered on the line at left-0, removed sm: prefixes */
             @apply absolute left-0 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-dark;
             transform: translate(-50%, 8px); /* Center dot horizontally, shift down slightly */
         }
@@ -402,7 +358,7 @@
         }
         .skill-item::before {
             content: '•';
-            color: #8B5CF6; /* brand-primary */
+            color: #B73F4D; /* brand-primary - NEW RED */
             @apply font-bold mr-3 flex-shrink-0;
         }
         
@@ -413,7 +369,7 @@
         }
         .project-card:hover {
             @apply transform -translate-y-2 shadow-2xl;
-            border-color: #8B5CF6; /* brand-primary */
+            border-color: #B73F4D; /* brand-primary - NEW RED */
         }
         .project-card .tech-badge {
             @apply inline-block bg-brand-dark text-brand-primary px-3 py-1 rounded-full text-xs font-semibold;
@@ -434,8 +390,7 @@
         }
     </style>
 
-    <!-- JavaScript for animations and active nav -->
-    <script>
+    <!-- JavaScript for animations and active nav --><script>
         document.addEventListener('DOMContentLoaded', (event) => {
             
             // Scroll-spy for navbar
