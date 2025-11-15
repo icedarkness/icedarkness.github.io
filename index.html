@@ -150,7 +150,7 @@
                 <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-brand-surface border-4 border-brand-primary shadow-2xl flex items-center justify-center overflow-hidden">
                     <img 
                         class="rounded-full w-full h-full object-cover"
-                        src="https://icedarkness.github.io/wen.jpeg" 
+                        src="wen.jpeg" 
                         alt="Wen Zhang - Profile Picture"
                         onerror="this.src='https://placehold.co/400x400/1E293B/8B5CF6?text=Wen+Zhang'; this.onerror=null;"
                     >
@@ -180,17 +180,20 @@
                 Work Experience
                 <div class="title-underline"></div>
             </h2>
-            <div class="mt-12 max-w-3xl mx-auto">
+            <!-- REMOVED max-w-3xl and mx-auto from this div -->
+            <div class="mt-12">
                 <!-- Timeline -->
                 <div class="relative space-y-8"> <!-- Reduced space -->
                     <!-- Timeline Line -->
-                    <!-- Always-on left-aligned line, moved from left-5 to left-2 -->
-                    <div class="absolute left-2 w-0.5 h-full bg-brand-surface -translate-x-1/2"></div>
+                    <!-- Always-on left-aligned line, moved to left-0 (edge) -->
+                    <div class="absolute left-0 w-0.5 h-full bg-brand-surface -translate-x-1/2"></div>
                     
                     <!-- Experience Item 1 -->
-                    <div class="timeline-item">
+                    <!-- ADDED pl-6 for padding from the line -->
+                    <div class="timeline-item pl-6">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content">
+                        <!-- ADDED max-w-3xl to the content block for alignment -->
+                        <div class="timeline-content max-w-3xl">
                             <span class="timeline-date">7/2024 to Present</span>
                             <h5 class="text-xl font-semibold text-white mt-1">Data Scientist Specialist – Banking and Lending</h5>
                             <p class="text-brand-text-secondary font-medium">EQUIFAX, INC. | Las Vegas, Nevada</p>
@@ -199,9 +202,11 @@
                     </div>
                     
                     <!-- Experience Item 2 -->
-                    <div class="timeline-item">
+                    <!-- ADDED pl-6 for padding from the line -->
+                    <div class="timeline-item pl-6">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content">
+                        <!-- ADDED max-w-3xl to the content block for alignment -->
+                        <div class="timeline-content max-w-3xl">
                             <span class="timeline-date">7/2018 to 6/2024</span>
                             <h5 class="text-xl font-semibold text-white mt-1">Data Scientist Specialist – Specialty Finance</h5>
                             <p class="text-brand-text-secondary font-medium">EQUIFAX, INC. | Las Vegas, Nevada</p>
@@ -210,9 +215,11 @@
                     </div>
 
                     <!-- Experience Item 3 -->
-                    <div class="timeline-item">
+                    <!-- ADDED pl-6 for padding from the line -->
+                    <div class="timeline-item pl-6">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content">
+                        <!-- ADDED max-w-3xl to the content block for alignment -->
+                        <div class="timeline-content max-w-3xl">
                             <span class="timeline-date">3/2017 to 7/2018</span>
                             <h5 class="text-xl font-semibold text-white mt-1">Data Scientist II (Fraud / Underwriting)</h5>
                             <p class="text-brand-text-secondary font-medium">DATAX, LTD | Las Vegas, Nevada</p>
@@ -221,9 +228,11 @@
                     </div>
                     
                     <!-- Experience Item 4 -->
-                    <div class="timeline-item">
+                    <!-- ADDED pl-6 for padding from the line -->
+                    <div class="timeline-item pl-6">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content">
+                        <!-- ADDED max-w-3xl to the content block for alignment -->
+                        <div class="timeline-content max-w-3xl">
                             <span class="timeline-date">11/2012 to 3/2017</span>
                             <h5 class="text-xl font-semibold text-white mt-1">Data Scientist</h5>
                             <p class="text-brand-text-secondary font-medium">PARTNERWEEKLY, LLC | Las Vegas, Nevada</p>
@@ -367,7 +376,8 @@
 
         /* Timeline styles */
         .timeline-item {
-            @apply relative pl-8; /* Reduced padding from pl-12 to pl-8 */
+            /* REMOVED @apply relative pl-8; */
+            @apply relative; 
         }
         .timeline-item .timeline-content {
             /* Removed all sm: prefixes */
@@ -378,8 +388,8 @@
             @apply bg-brand-surface p-6 rounded-lg shadow-lg;
         }
         .timeline-item .timeline-dot {
-            /* Centered on the line at left-2 (was left-5), removed sm: prefixes */
-            @apply absolute left-2 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-dark;
+            /* Centered on the line at left-0 (was left-2), removed sm: prefixes */
+            @apply absolute left-0 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-dark;
             transform: translate(-50%, 8px); /* Center dot horizontally, shift down slightly */
         }
         .timeline-item .timeline-date {
