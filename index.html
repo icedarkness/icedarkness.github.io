@@ -5,439 +5,501 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wen Zhang - Principal Data Scientist</title>
     
-    <!-- Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Inter Font --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Google Fonts: Inter (Body) and Playfair Display (Headings for elegance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <script>
-        // Configuration for Tailwind CSS
+        // Tailwind Configuration
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
-                        'brand-primary': '#B73F4D', // NEW: Deep Red/Maroon from your dress
-                        'brand-primary-hover': '#A03845', // NEW: Slightly darker red
-                        'brand-dark': '#0F172A', // Dark Navy from original
-                        'brand-surface': '#1E293B', // Lighter Navy from original
-                        'brand-text': '#E0E0E0', // Light Gray from original
-                        'brand-text-secondary': '#94A3B8', // Dimmer Gray from original
+                        'brand-primary': '#B73F4D',      // Deep Red from photo
+                        'brand-primary-light': '#D45D6A', 
+                        'brand-dark': '#0F172A',          
+                        'brand-glass': 'rgba(30, 41, 59, 0.7)', // Glass effect base
+                        'brand-text': '#F8FAFC',          
+                        'brand-text-muted': '#CBD5E1',    // Lighter muted text for better contrast on image
                     },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
                 },
             },
         };
     </script>
     
     <style>
-        /* Custom scrollbar for a more modern feel */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
         ::-webkit-scrollbar-track {
             background: #0F172A;
         }
         ::-webkit-scrollbar-thumb {
             background: #334155;
-            border-radius: 4px;
+            border-radius: 5px;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #475569;
         }
-        
+
+        /* Background Image Setup */
         body {
-            /* Adjusted radial gradients to match the new primary color */
-            background-color: #0F172A; /* brand-dark */
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(353, 58%, 20%, 0.3) 0px, transparent 50%), /* Adjusted hue for red */
-                radial-gradient(at 90% 80%, hsla(353, 58%, 20%, 0.2) 0px, transparent 50%); /* Adjusted hue for red */
+            background-color: #0F172A;
+            /* High-quality dark abstract network image */
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax-like effect */
+            position: relative;
         }
+        
+        /* Dark Overlay to ensure text readability */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85); /* 85% opacity dark blue overlay */
+            z-index: -1;
+        }
+
+        /* Glassmorphism Card Utility */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4); /* Low opacity slate */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-brand {
+            background: linear-gradient(to right, #B73F4D, #E17582);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
     </style>
 </head>
-<body class="text-brand-text font-sans antialiased">
+<body class="text-brand-text antialiased selection:bg-brand-primary selection:text-white">
 
-    <!-- Header & Navbar --><header class="sticky top-0 z-50 w-full backdrop-blur-lg bg-brand-dark/80 border-b border-brand-surface">
-        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo / Name --><div class="flex-shrink-0">
-                    <a href="#" class="text-2xl font-bold text-white">Wen Zhang</a>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-serif text-2xl font-bold tracking-wide text-white">WZ.</a>
                 </div>
                 
-                <!-- Navigation Links --><div class="hidden sm:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-brand-text-secondary hover:text-white hover:bg-brand-surface transition-colors">About</a>
-                        <a href="#experience" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-brand-text-secondary hover:text-white hover:bg-brand-surface transition-colors">Experience</a>
-                        <a href="#skills" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-brand-text-secondary hover:text-white hover:bg-brand-surface transition-colors">Skills</a>
-                        <a href="#projects" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-brand-text-secondary hover:text-white hover:bg-brand-surface transition-colors">Projects</a>
-                        <a href="#contact" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-brand-text-secondary hover:text-white hover:bg-brand-surface transition-colors">Contact</a>
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-10">
+                        <a href="#about" class="text-sm font-medium text-brand-text-muted hover:text-white transition-colors uppercase tracking-wider">About</a>
+                        <a href="#experience" class="text-sm font-medium text-brand-text-muted hover:text-white transition-colors uppercase tracking-wider">Experience</a>
+                        <a href="#skills" class="text-sm font-medium text-brand-text-muted hover:text-white transition-colors uppercase tracking-wider">Skills</a>
+                        <a href="#projects" class="text-sm font-medium text-brand-text-muted hover:text-white transition-colors uppercase tracking-wider">Projects</a>
+                        <a href="#contact" class="px-5 py-2 rounded-full border border-white/20 text-sm font-medium text-white hover:bg-white hover:text-brand-dark transition-all uppercase tracking-wider">Contact</a>
                     </div>
                 </div>
-                
-                <!-- Mobile Menu Button (Optional, not functional) --><div class="-mr-2 flex sm:hidden">
-                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-brand-text-secondary hover:text-white hover:bg-brand-surface focus:outline-none">
-                        <span class="sr-only">Open main menu</span>
-                        <!-- Icon for menu --><svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-white p-2">
+                        <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
-        </nav>
-    </header>
-
-    <!-- Main Content --><main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        <!-- Hero Section --><section id="hero" class="relative isolate py-24 sm:py-32 flex flex-col md:flex-row items-center justify-between gap-12">
-            <!-- Abstract Grid Background --><div class="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-                <svg class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2" width="1200" height="800" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="hero-pattern" width="64" height="64" patternUnits="userSpaceOnUse">
-                            <path d="M0 64L64 0" stroke="#1E293B" stroke-width="0.5"/>
-                            <path d="M64 64L0 0" stroke="#1E293B" stroke-width="0.5"/>
-                        </pattern>
-                    </defs>
-                    <rect width="1200" height="800" fill="url(#hero-pattern)" />
-                </svg>
-            </div>
-            
-            <!-- Text Content --><div class="md:w-3/5 text-center md:text-left">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white">
-                    Wen Zhang
-                </h1>
-                <h2 class="text-2xl sm:text-3xl font-medium text-brand-primary mt-2">
-                    Principal Data Scientist
-                </h2>
-                <h3 class="text-xl sm:text-2xl font-medium text-white mt-1">
-                    Credit Risk & AI Specialist
-                </h3>
-                <p class="mt-6 text-lg text-brand-text-secondary max-w-2xl mx-auto md:mx-0">
-                    Fusing 12+ years of deep experience in credit risk modeling with a modern AI-driven workflow, leveraging tools like Gemini and Claude to accelerate development and deliver high-impact financial solutions.
-                </p>
-                
-                <!-- Buttons & Links --><div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
-                    <a href="https://www.linkedin.com/in/wenzhangdatascientist/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold bg-brand-primary text-white shadow-lg hover:bg-brand-primary-hover transform hover:-translate-y-0.5 transition-all">
-                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.75c0-1.2-.5-2-1.5-2s-1.5.8-1.5 2V19h-3v-9h3V8.75c0-3 1.75-4.75 4.5-4.75S19 5.75 19 8.75z"></path></svg>
-                        LinkedIn
-                    </a>
-                    <a href="https://github.com/icedarkness" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold bg-brand-surface text-white shadow-lg hover:bg-gray-700 transform hover:-translate-y-0.5 transition-all">
-                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.49.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.81c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.398.1 2.65.64.7 1.03 1.595 1.03 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.003 10.003 0 0022 12c0-5.523-4.477-10-10-10z"></path></svg>
-                        GitHub
-                    </a>
-                    <a href="https://icedarkness.github.io/Wen_Zhang_Principal_Data_Scientist_Resume.pdf" download="" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold bg-brand-surface text-white shadow-lg hover:bg-gray-700 transform hover:-translate-y-0.5 transition-all">
-                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                        Download Resume
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Profile Image --><div class="md:w-2/5 flex justify-center">
-                <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-brand-surface border-4 border-brand-primary shadow-2xl flex items-center justify-center overflow-hidden">
-                    <img 
-                        class="rounded-full w-full h-full object-cover"
-                        src="wen.jpeg" 
-                        alt="Wen Zhang - Profile Picture"
-                        onerror="this.src='https://placehold.co/400x400/1E293B/B73F4D?text=Wen+Zhang'; this.onerror=null;"
-                    >
-                </div>
-            </div>
-        </section>
-
-        <!-- About Me Section --><section id="about" class="py-24">
-            <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
-                About Me
-                <div class="title-underline"></div>
-            </h2>
-            <div class="mt-12 bg-brand-surface rounded-xl shadow-2xl p-8 sm:p-12">
-                <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
-                    I am a passionate Data Scientist with a deep background in the banking, specialty finance, and fintech sectors. My work focuses on transforming complex data into actionable insights that solve real-world problems. I specialize in developing and deploying robust predictive models, from FCRA-compliant credit risk systems to non-FCRA models for small business lending.
-                </p>
-                <p class="text-lg text-brand-text-secondary leading-relaxed">
-                    I am highly skilled in modernizing legacy systems and automating analytics pipelines. I enhance this traditional expertise by leveraging a modern workflow with Generative AI tools (Gemini, Claude, Cursor) to accelerate development cycles, automate reporting, and build intelligent, next-generation applications. I hold a Master of Science in Applied Statistics &amp; Operational Research and am a certified Deep Learning specialist, driven by the challenge of finding elegant, data-driven solutions that create a measurable impact.
-                </p>
-            </div>
-        </section>
-
-        <!-- Work Experience Section --><section id="experience" class="py-24">
-            <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
-                Work Experience
-                <div class="title-underline"></div>
-            </h2>
-            <div class="mt-12">
-                <!-- Timeline --><div class="relative space-y-8">
-                    <!-- Timeline Line --><div class="absolute left-0 w-0.5 h-full bg-brand-surface -translate-x-1/2"></div>
-                    
-                    <!-- Experience Item 1 --><div class="timeline-item pl-6">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content max-w-3xl">
-                            <span class="timeline-date">7/2024 to Present</span>
-                            <h5 class="text-xl font-semibold text-white mt-1">Data Scientist Specialist – Banking and Lending</h5>
-                            <p class="text-brand-text-secondary font-medium">EQUIFAX, INC. | Las Vegas, Nevada</p>
-                            <p class="text-brand-text-secondary mt-2">Developing credit risk models for fintech and subprime clients, streamlining processes to improve client outcomes and driving automation efforts.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Experience Item 2 --><div class="timeline-item pl-6">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content max-w-3xl">
-                            <span class="timeline-date">7/2018 to 6/2024</span>
-                            <h5 class="text-xl font-semibold text-white mt-1">Data Scientist Specialist – Specialty Finance</h5>
-                            <p class="text-brand-text-secondary font-medium">EQUIFAX, INC. | Las Vegas, Nevada</p>
-                            <p class="text-brand-text-secondary mt-2">Delivered advanced analytics solutions and model automation to elevate client portfolios by integrating alternative data and optimizing credit scoring strategies.</p>
-                        </div>
-                    </div>
-
-                    <!-- Experience Item 3 --><div class="timeline-item pl-6">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content max-w-3xl">
-                            <span class="timeline-date">3/2017 to 7/2018</span>
-                            <h5 class="text-xl font-semibold text-white mt-1">Data Scientist II (Fraud / Underwriting)</h5>
-                            <p class="text-brand-text-secondary font-medium">DATAX, LTD | Las Vegas, Nevada</p>
-                            <p class="text-brand-text-secondary mt-2">Focused on fraud and underwriting, partnering with lending clients to develop underwriting rule improvement strategies using Angoss decision trees.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Experience Item 4 --><div class="timeline-item pl-6">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content max-w-3xl">
-                            <span class="timeline-date">11/2012 to 3/2017</span>
-                            <h5 class="text-xl font-semibold text-white mt-1">Data Scientist</h5>
-                            <p class="text-brand-text-secondary font-medium">PARTNERWEEKLY, LLC | Las Vegas, Nevada</p>
-                            <p class="text-brand-text-secondary mt-2">Led machine learning initiatives to optimize financial services processes, reduce fraud risk, and collaborate with clients to enhance business performance.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-        
-        <!-- Skills Section --><section id="skills" class="py-24">
-            <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
-                Skills
-                <div class="title-underline"></div>
-            </h2>
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Core Data Science --><div class="bg-brand-surface rounded-xl shadow-2xl p-8">
-                    <h4 class="text-2xl font-bold text-white mb-6">Core Data Science</h4>
-                    <ul class="space-y-4">
-                        <li class="skill-item"><strong>Statistical Machine Learning:</strong> GBM (XGBoost), Random Forest, SVM, KNN, AdaBoost, LSTM, Logistic Regression</li>
-                        <li class="skill-item"><strong>Data Analytics:</strong> Data Mining &amp; Validation, Big Data Analytics, ETL Processes, Credit Scoring</li>
-                        <li class="skill-item"><strong>Risk Modeling:</strong> Predictive Risk Modeling, Financial Risk Modeling, Fraud Detection &amp; Prevention</li>
-                        <li class="skill-item"><strong>Programming &amp; Tools:</strong> Python, SQL, SAS, Angoss</li>
-                    </ul>
-                </div>
-                
-                <!-- Generative AI --><div class="bg-brand-surface rounded-xl shadow-2xl p-8">
-                    <h4 class="text-2xl font-bold text-white mb-6">Generative AI & LLM Tooling</h4>
-                    <ul class="space-y-4">
-                        <li class="skill-item"><strong>AI-Powered Development:</strong> Using Gemini, Claude, and Cursor for efficient code generation, debugging, and workflow automation.</li>
-                        <li class="skill-item"><strong>Intelligent Applications:</strong> Building solutions with Retrieval-Augmented Generation (RAG) to provide context-aware, accurate responses.</li>
-                        <li class="skill-item"><strong>Core Competencies:</strong> Prompt Engineering, API Integration (Gemini), Vector Databases (FAISS), and foundational model understanding.</li>
-                    </ul>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Projects Section --><section id="projects" class="py-24">
-            <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
-                Projects
-                <div class="title-underline"></div>
-            </h2>
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Project Card 1 --><div class="project-card">
-                    <h5 class="text-xl font-semibold text-white">RAG-Powered Financial Chatbot</h5>
-                    <p class="text-brand-text-secondary mt-3 mb-4">Built an intelligent chatbot to improve access to financial product information, leveraging a RAG pipeline to ensure accurate, source-grounded answers.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-badge">RAG</span><span class="tech-badge">Gemini API</span><span class="tech-badge">FAISS</span><span class="tech-badge">GenAI</span>
-                    </div>
-                    <a href="https://github.com/icedarkness/showcase/tree/main/RAG-Powered%20Financial%20Chatbot" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
-                </div>
-
-                <!-- Project Card 2 --><div class="project-card">
-                    <h5 class="text-xl font-semibold text-white">Lending Club Credit Risk Model with XAI</h5>
-                    <p class="text-brand-text-secondary mt-3 mb-4">Developed a complete credit risk model on the Lending Club dataset, with a strong focus on Explainable AI (XAI) to make complex model decisions transparent.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-badge">Python</span><span class="tech-badge">LightGBM</span><span class="tech-badge">SHAP</span><span class="tech-badge">XAI</span>
-                    </div>
-                    <a href="https://github.com/icedarkness/showcase/blob/main/Lending%20Club%20Credit%20Risk%20Model%20with%20XAI/Lending%20Club%20Credit%20Risk%20Model%20with%20XAI.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
-                </div>
-
-                <!-- Project Card 3 --><div class="project-card">
-                    <h5 class="text-xl font-semibold text-white">German Credit Risk Model with XAI</h5>
-                    <p class="text-brand-text-secondary mt-3 mb-4">Built a highly accurate classification model on the Statlog dataset, using SHAP for deep model interpretation and explaining the "why" behind individual predictions.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-badge">Python</span><span class="tech-badge">RandomForest</span><span class="tech-badge">SHAP</span><span class="tech-badge">Scikit-learn</span>
-                    </div>
-                    <a href="https://github.com/icedarkness/showcase/blob/main/German%20Credit%20Data%20(Statlog)/German_Credit_Data.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
-                </div>
-
-                <!-- Project Card 4 --><div class="project-card">
-                    <h5 class="text-xl font-semibold text-white">Customer Segmentation for Marketing</h5>
-                    <p class="text-brand-text-secondary mt-3 mb-4">Used K-Means clustering to segment customers and proposed actionable marketing strategies, demonstrating the use of unsupervised learning to drive business value.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-badge">Python</span><span class="tech-badge">K-Means</span><span class="tech-badge">Scikit-learn</span><span class="tech-badge">Marketing</span>
-                    </div>
-                    <a href="https://github.com/icedarkness/showcase/blob/main/Customer%20Segmentation%20for%20Marketing/Customer%20Segmentation%20for%20Marketing.ipynb" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
-                </div>
-
-                <!-- Project Card 5 --><div class="project-card">
-                    <h5 class="text-xl font-semibold text-white">Time-Series Forecasting of Loan Performance</h5>
-                    <p class="text-brand-text-secondary mt-3 mb-4">Forecasted monthly loan default volumes using Prophet, including trend and seasonality decomposition to provide clear, actionable insights for financial planning.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-badge">Python</span><span class="tech-badge">Prophet</span><span class="tech-badge">Pandas</span><span class="tech-badge">Time-Series</span>
-                    </div>
-                    <a href="https://github.com/icedarkness/showcase/tree/main/Time-Series%20Forecasting%20of%20Loan%20Volume%20(SARIMA%20vs.%20Prophet)" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Contact Section --><section id="contact" class="py-24">
-            <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-white">
-                Get In Touch
-                <div class="title-underline"></div>
-            </h2>
-            <div class="mt-12 max-w-2xl mx-auto text-center">
-                <p class="text-lg text-brand-text-secondary mb-8">
-                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team. Feel free to reach out.
-                </p>
-                <a href="mailto:wen.zhang.ds@outlook.com" class="inline-block text-xl sm:text-2xl font-medium text-brand-primary hover:text-brand-primary-hover transition-colors">
-                    wen.zhang.ds@outlook.com
-                </a>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer --><footer class="bg-brand-surface border-t border-gray-700 mt-24">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-            <p class="text-brand-text-secondary text-sm">
-                © 2025 Wen Zhang. All Rights Reserved.
-            </p>
         </div>
-    </footer>
-
-    <!-- Custom CSS for components --><style>
-        .section-title .title-underline {
-            width: 60px;
-            height: 4px;
-            background-color: #B73F4D; /* brand-primary - NEW RED */
-            margin: 12px auto 0;
-            border-radius: 2px;
-        }
-
-        /* Timeline styles */
-        .timeline-item {
-            @apply relative; 
-        }
-        .timeline-item .timeline-content {
-            /* Removed all sm: prefixes */
-            @apply bg-brand-surface p-6 rounded-lg shadow-lg;
-        }
-        .timeline-item:nth-child(odd) .timeline-content {
-            /* Removed all sm: prefixes and text-right */
-            @apply bg-brand-surface p-6 rounded-lg shadow-lg;
-        }
-        .timeline-item .timeline-dot {
-            /* Centered on the line at left-0, removed sm: prefixes */
-            @apply absolute left-0 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-dark;
-            transform: translate(-50%, 8px); /* Center dot horizontally, shift down slightly */
-        }
-        .timeline-item .timeline-date {
-            @apply block text-sm font-semibold text-brand-primary mb-1;
-        }
-
-        /* Skills list item */
-        .skill-item {
-            @apply text-brand-text-secondary leading-relaxed flex;
-        }
-        .skill-item::before {
-            content: '•';
-            color: #B73F4D; /* brand-primary - NEW RED */
-            @apply font-bold mr-3 flex-shrink-0;
-        }
         
-        /* Project card styles */
-        .project-card {
-            @apply bg-brand-surface rounded-xl shadow-lg p-6 flex flex-col justify-between transition-all duration-300;
-            border: 1px solid transparent;
-        }
-        .project-card:hover {
-            @apply transform -translate-y-2 shadow-2xl;
-            border-color: #B73F4D; /* brand-primary - NEW RED */
-        }
-        .project-card .tech-badge {
-            @apply inline-block bg-brand-dark text-brand-primary px-3 py-1 rounded-full text-xs font-semibold;
-        }
-        .project-card .project-link {
-            @apply inline-block text-brand-primary font-medium mt-auto transition-colors;
-        }
-        .project-card .project-link:hover {
-            @apply text-brand-primary-hover;
-        }
-        .project-card .project-link::after {
-            content: ' →';
-        }
-        
-        /* Active Nav Link Styling */
-        .nav-link.active {
-            @apply text-white bg-brand-surface;
-        }
-    </style>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-brand-dark/95 backdrop-blur-xl border-b border-white/10" id="mobile-menu">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#about" class="block px-3 py-3 rounded-md text-base font-medium text-brand-text-muted hover:text-white hover:bg-white/5">About</a>
+                <a href="#experience" class="block px-3 py-3 rounded-md text-base font-medium text-brand-text-muted hover:text-white hover:bg-white/5">Experience</a>
+                <a href="#skills" class="block px-3 py-3 rounded-md text-base font-medium text-brand-text-muted hover:text-white hover:bg-white/5">Skills</a>
+                <a href="#projects" class="block px-3 py-3 rounded-md text-base font-medium text-brand-text-muted hover:text-white hover:bg-white/5">Projects</a>
+                <a href="#contact" class="block px-3 py-3 rounded-md text-base font-medium text-brand-text-muted hover:text-white hover:bg-white/5">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-    <!-- JavaScript for animations and active nav --><script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            
-            // Scroll-spy for navbar
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('header .nav-link');
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Decorative background glow -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary/20 rounded-full blur-[128px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none"></div>
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.4 // 40% of the section must be visible
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                let currentActive = null;
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-16">
                 
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        currentActive = entry.target.id;
-                    }
-                });
+                <!-- Left: Text -->
+                <div class="flex-1 text-center lg:text-left space-y-8">
+                    <div class="space-y-4">
+                        <span class="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/10 text-brand-primary-light text-xs font-bold tracking-[0.2em] uppercase backdrop-blur-md">
+                            Portfolio 2025
+                        </span>
+                        <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight">
+                            Wen <span class="text-gradient-brand">Zhang</span>
+                        </h1>
+                        <p class="text-xl sm:text-2xl text-brand-text-muted font-light max-w-2xl mx-auto lg:mx-0">
+                            Principal Data Scientist specializing in <span class="text-white font-medium">Credit Risk AI</span> & <span class="text-white font-medium">Generative Models</span>.
+                        </p>
+                    </div>
+                    
+                    <p class="text-base text-brand-text-muted/80 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                        Fusing 12+ years of deep statistical modeling experience with modern AI workflows to build the next generation of financial technology.
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-5 pt-4">
+                        <a href="https://www.linkedin.com/in/wenzhangdatascientist/" target="_blank" class="group relative px-8 py-3.5 rounded-full bg-brand-primary text-white font-semibold overflow-hidden shadow-[0_0_20px_rgba(183,63,77,0.3)] transition-all hover:shadow-[0_0_30px_rgba(183,63,77,0.5)] hover:-translate-y-1">
+                            <div class="absolute inset-0 w-full h-full bg-white/20 group-hover:translate-x-full transition-transform duration-500 -skew-x-12 -translate-x-full"></div>
+                            <span class="relative flex items-center gap-2"><i class="fab fa-linkedin"></i> Connect</span>
+                        </a>
+                        <a href="https://icedarkness.github.io/Wen_Zhang_Principal_Data_Scientist_Resume.pdf" download class="group px-8 py-3.5 rounded-full glass-card text-white font-semibold transition-all hover:bg-white/10 hover:-translate-y-1">
+                            <span class="flex items-center gap-2"><i class="fas fa-download"></i> Resume</span>
+                        </a>
+                    </div>
+                </div>
 
-                // Find the topmost visible section
-                if (!currentActive) {
-                    for (let i = sections.length - 1; i >= 0; i--) {
-                        const section = sections[i];
-                        const rect = section.getBoundingClientRect();
-                        if (rect.top <= 100) { // 100px from top
-                            currentActive = section.id;
-                            break;
-                        }
-                    }
-                }
+                <!-- Right: Image -->
+                <div class="flex-shrink-0 relative group">
+                    <!-- Spinning border ring -->
+                    <div class="absolute inset-0 rounded-full border border-dashed border-white/20 animate-[spin_10s_linear_infinite]"></div>
+                    <div class="absolute -inset-4 bg-gradient-to-tr from-brand-primary to-transparent rounded-full opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-700"></div>
+                    
+                    <div class="w-72 h-72 sm:w-96 sm:h-96 relative rounded-full p-2 glass-card">
+                        <div class="w-full h-full rounded-full overflow-hidden relative">
+                            <div class="absolute inset-0 bg-brand-primary/10 z-10 mix-blend-overlay"></div>
+                            <img 
+                                src="wen.jpeg" 
+                                alt="Wen Zhang" 
+                                class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                                onerror="this.src='https://placehold.co/400x400/1E293B/B73F4D?text=WZ'"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/50">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
 
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.hash === `#${currentActive}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }, observerOptions);
+    <!-- About Section -->
+    <section id="about" class="py-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-10 md:p-14 relative overflow-hidden">
+                <!-- Decorative accent -->
+                <div class="absolute top-0 left-0 w-1 h-full bg-brand-primary"></div>
+                
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-8">About Me</h2>
+                
+                <div class="space-y-6 text-lg text-brand-text-muted leading-relaxed font-light">
+                    <p>
+                        I am a passionate <strong class="text-white font-medium">Principal Data Scientist</strong> with a deep background in the banking, specialty finance, and fintech sectors. My work focuses on transforming complex data into actionable insights that solve real-world problems. I specialize in developing and deploying robust predictive models, from FCRA-compliant credit risk systems to non-FCRA models for small business lending.
+                    </p>
+                    <p>
+                        I am highly skilled in modernizing legacy systems and automating analytics pipelines. I enhance this traditional expertise by leveraging a modern workflow with <strong class="text-white font-medium">Generative AI tools</strong> (Gemini, Claude, Cursor) to accelerate development cycles, automate reporting, and build intelligent, next-generation applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-16 text-center">Professional Journey</h2>
+
+            <!-- Timeline Container -->
+            <div class="relative pl-6 md:pl-12">
+                <!-- The Vertical Line -->
+                <div class="absolute left-[7px] md:left-[7px] top-2 bottom-0 w-[2px] bg-gradient-to-b from-brand-primary via-white/10 to-transparent"></div>
+
+                <!-- Item 1 -->
+                <div class="relative mb-16 pl-10 md:pl-16 group">
+                    <div class="absolute left-0 top-2 w-4 h-4 rounded-full bg-brand-primary shadow-[0_0_15px_rgba(183,63,77,0.8)] ring-4 ring-brand-dark group-hover:scale-125 transition-transform"></div>
+                    
+                    <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white">Data Scientist Specialist</h3>
+                            <span class="inline-block px-3 py-1 rounded-md bg-brand-primary/20 text-brand-primary-light text-xs font-bold tracking-wide uppercase mt-2 sm:mt-0">Present</span>
+                        </div>
+                        <p class="text-white/80 font-medium mb-4 flex items-center gap-2"><i class="fas fa-building text-brand-primary/70"></i> EQUIFAX, INC. | Las Vegas, NV</p>
+                        <p class="text-brand-text-muted text-sm leading-relaxed">
+                            Developing credit risk models for fintech and subprime clients, streamlining processes to improve client outcomes and driving automation efforts.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative mb-16 pl-10 md:pl-16 group">
+                    <div class="absolute left-0 top-2 w-4 h-4 rounded-full bg-brand-dark border-2 border-white/30 group-hover:border-brand-primary group-hover:bg-brand-primary transition-all"></div>
+                    
+                    <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white">Data Scientist Specialist (Specialty Finance)</h3>
+                            <span class="text-brand-text-muted/60 text-sm font-mono mt-1 sm:mt-0">2018 – 2024</span>
+                        </div>
+                        <p class="text-white/80 font-medium mb-4 flex items-center gap-2"><i class="fas fa-building text-brand-primary/70"></i> EQUIFAX, INC.</p>
+                        <p class="text-brand-text-muted text-sm leading-relaxed">
+                            Delivered advanced analytics solutions and model automation to elevate client portfolios by integrating alternative data and optimizing credit scoring strategies.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative mb-16 pl-10 md:pl-16 group">
+                    <div class="absolute left-0 top-2 w-4 h-4 rounded-full bg-brand-dark border-2 border-white/30 group-hover:border-brand-primary group-hover:bg-brand-primary transition-all"></div>
+                    
+                    <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white">Data Scientist II</h3>
+                            <span class="text-brand-text-muted/60 text-sm font-mono mt-1 sm:mt-0">2017 – 2018</span>
+                        </div>
+                        <p class="text-white/80 font-medium mb-4 flex items-center gap-2"><i class="fas fa-building text-brand-primary/70"></i> DATAX, LTD</p>
+                        <p class="text-brand-text-muted text-sm leading-relaxed">
+                            Focused on fraud and underwriting, partnering with lending clients to develop underwriting rule improvement strategies using Angoss decision trees.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="relative pl-10 md:pl-16 group">
+                    <div class="absolute left-0 top-2 w-4 h-4 rounded-full bg-brand-dark border-2 border-white/30 group-hover:border-brand-primary group-hover:bg-brand-primary transition-all"></div>
+                    
+                    <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white">Data Scientist</h3>
+                            <span class="text-brand-text-muted/60 text-sm font-mono mt-1 sm:mt-0">2012 – 2017</span>
+                        </div>
+                        <p class="text-white/80 font-medium mb-4 flex items-center gap-2"><i class="fas fa-building text-brand-primary/70"></i> PARTNERWEEKLY, LLC</p>
+                        <p class="text-brand-text-muted text-sm leading-relaxed">
+                            Led machine learning initiatives to optimize financial services processes, reduce fraud risk, and collaborate with clients to enhance business performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white">Technical Expertise</h2>
+                <p class="mt-4 text-brand-text-muted max-w-2xl mx-auto">A blend of traditional statistical rigor and cutting-edge AI capabilities.</p>
+            </div>
             
-        });
-    </script>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-brand-primary to-pink-600 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        <i class="fas fa-brain text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-6">Core Data Science</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-brand-text-muted">
+                            <span class="w-2 h-2 bg-brand-primary rounded-full"></span>
+                            <span><strong class="text-white">ML:</strong> XGBoost, Random Forest, SVM, Logistic</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-brand-text-muted">
+                            <span class="w-2 h-2 bg-brand-primary rounded-full"></span>
+                            <span><strong class="text-white">Analytics:</strong> Credit Scoring, ETL, Big Data</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-brand-text-muted">
+                            <span class="w-2 h-2 bg-brand-primary rounded-full"></span>
+                            <span><strong class="text-white">Tools:</strong> Python, SQL, SAS, Angoss</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        <i class="fas fa-microchip text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-6">Generative AI & LLM</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-brand-text-muted">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            <span><strong class="text-white">AI-Dev:</strong> Gemini, Claude, Cursor workflows</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-brand-text-muted">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            <span><strong class="text-white">RAG:</strong> Context-aware applications & FAISS</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-brand-text-muted">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            <span><strong class="text-white">Core:</strong> Prompt Engineering, API Integration</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-16 text-center">Selected Works</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="h-2 bg-gradient-to-r from-brand-primary to-purple-600"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white">RAG Financial Chatbot</h3>
+                            <i class="fas fa-robot text-brand-primary/80 text-xl"></i>
+                        </div>
+                        <p class="text-brand-text-muted text-sm mb-6 leading-relaxed">
+                            Intelligent chatbot leveraging RAG pipeline and Gemini API to provide accurate, source-grounded financial answers.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-brand-primary-light font-medium border border-white/10">GenAI</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-brand-primary-light font-medium border border-white/10">FAISS</span>
+                        </div>
+                        <a href="https://github.com/icedarkness/showcase/tree/main/RAG-Powered%20Financial%20Chatbot" target="_blank" class="text-sm font-semibold text-white hover:text-brand-primary-light flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                            View Code <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="h-2 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white">Credit Risk XAI</h3>
+                            <i class="fas fa-chart-line text-blue-400 text-xl"></i>
+                        </div>
+                        <p class="text-brand-text-muted text-sm mb-6 leading-relaxed">
+                            Complete credit risk model on Lending Club data with focus on Explainable AI (SHAP) for transparent decision making.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-blue-300 font-medium border border-white/10">LightGBM</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-blue-300 font-medium border border-white/10">SHAP</span>
+                        </div>
+                        <a href="https://github.com/icedarkness/showcase/blob/main/Lending%20Club%20Credit%20Risk%20Model%20with%20XAI/Lending%20Club%20Credit%20Risk%20Model%20with%20XAI.ipynb" target="_blank" class="text-sm font-semibold text-white hover:text-blue-300 flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                            View Notebook <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="h-2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white">German Credit Model</h3>
+                            <i class="fas fa-shield-alt text-green-400 text-xl"></i>
+                        </div>
+                        <p class="text-brand-text-muted text-sm mb-6 leading-relaxed">
+                            Highly accurate classification model on Statlog dataset using Random Forest and deep interpretability analysis.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-green-300 font-medium border border-white/10">RandomForest</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-green-300 font-medium border border-white/10">Sklearn</span>
+                        </div>
+                        <a href="https://github.com/icedarkness/showcase/blob/main/German%20Credit%20Data%20(Statlog)/German_Credit_Data.ipynb" target="_blank" class="text-sm font-semibold text-white hover:text-green-300 flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                            View Notebook <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="h-2 bg-gradient-to-r from-orange-500 to-yellow-500"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white">Loan Forecasting</h3>
+                            <i class="fas fa-chart-area text-orange-400 text-xl"></i>
+                        </div>
+                        <p class="text-brand-text-muted text-sm mb-6 leading-relaxed">
+                            Time-series forecasting of monthly loan defaults using Prophet, with trend and seasonality decomposition.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-orange-300 font-medium border border-white/10">Prophet</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-orange-300 font-medium border border-white/10">TimeSeries</span>
+                        </div>
+                        <a href="https://github.com/icedarkness/showcase/tree/main/Time-Series%20Forecasting%20of%20Loan%20Volume%20(SARIMA%20vs.%20Prophet)" target="_blank" class="text-sm font-semibold text-white hover:text-orange-300 flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                            View Code <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="h-2 bg-gradient-to-r from-pink-500 to-rose-500"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white">Customer Segmentation</h3>
+                            <i class="fas fa-users text-pink-400 text-xl"></i>
+                        </div>
+                        <p class="text-brand-text-muted text-sm mb-6 leading-relaxed">
+                             K-Means clustering to segment customers and propose actionable marketing strategies based on unsupervised learning.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-pink-300 font-medium border border-white/10">Clustering</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-pink-300 font-medium border border-white/10">K-Means</span>
+                        </div>
+                        <a href="https://github.com/icedarkness/showcase/blob/main/Customer%20Segmentation%20for%20Marketing/Customer%20Segmentation%20for%20Marketing.ipynb" target="_blank" class="text-sm font-semibold text-white hover:text-pink-300 flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                            View Notebook <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-black/40 backdrop-blur-xl border-t border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Ready to Collaborate?</h2>
+            <p class="text-lg text-brand-text-muted mb-10 max-w-2xl mx-auto font-light">
+                I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team.
+            </p>
+            <a href="mailto:wen.zhang.ds@outlook.com" class="inline-block text-2xl sm:text-4xl font-bold text-white hover:text-brand-primary transition-all">
+                wen.zhang.ds@outlook.com
+            </a>
+            
+            <div class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-brand-text-muted">
+                <p>&copy; 2025 Wen Zhang. All Rights Reserved.</p>
+                <div class="flex space-x-8 mt-6 md:mt-0">
+                    <a href="https://www.linkedin.com/in/wenzhangdatascientist/" class="hover:text-white transition-colors text-xl"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/icedarkness" class="hover:text-white transition-colors text-xl"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
