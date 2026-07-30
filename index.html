@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Wen Zhang is an AI Architect Specialist and data scientist building internal analytics agents, GCP-enabled workflows, and responsible AI solutions for financial services.">
+    <meta name="description" content="Wen Zhang is an AI Architect Specialist building governed analytics agents, GCP-enabled AI workflows, and responsible decision systems for financial services. Explore FinSight and other open-source AI projects.">
     <meta name="theme-color" content="#0b1020">
     <meta name="color-scheme" content="dark">
     <meta property="og:type" content="website">
@@ -774,8 +774,20 @@
         }
 
         .project:first-child {
+            grid-column: 1 / -1;
+            min-height: 390px;
+            background:
+                radial-gradient(circle at 88% 18%, rgba(112, 198, 233, .17), transparent 25rem),
+                linear-gradient(135deg, rgba(55, 29, 51, .88), rgba(20, 27, 49, .8));
+        }
+
+        .project:nth-child(2) {
             grid-column: span 8;
             background: linear-gradient(135deg, rgba(20, 52, 61, .8), rgba(20, 27, 49, .72));
+        }
+
+        .project:nth-last-child(-n + 2) {
+            grid-column: span 6;
         }
 
         .project-tag {
@@ -814,6 +826,37 @@
             color: #bdc5d7;
             font-size: .71rem;
             font-weight: 600;
+        }
+
+        .project-proof {
+            width: min(100%, 780px);
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .project-proof span {
+            display: grid;
+            gap: 2px;
+            padding: 13px 14px;
+            border: 1px solid rgba(255, 255, 255, .11);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .035);
+        }
+
+        .project-proof strong {
+            color: white;
+            font-size: 1rem;
+            letter-spacing: -.02em;
+        }
+
+        .project-proof small {
+            color: var(--subtle);
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
         }
 
         .project-link {
@@ -1003,7 +1046,9 @@
             }
 
             .project,
-            .project:first-child {
+            .project:first-child,
+            .project:nth-child(2),
+            .project:nth-last-child(-n + 2) {
                 grid-column: span 6;
             }
         }
@@ -1064,8 +1109,14 @@
             }
 
             .project,
-            .project:first-child {
+            .project:first-child,
+            .project:nth-child(2),
+            .project:nth-last-child(-n + 2) {
                 grid-column: 1 / -1;
+            }
+
+            .project-proof {
+                grid-template-columns: 1fr 1fr;
             }
 
             .footer-inner {
@@ -1321,12 +1372,26 @@
                         <span class="section-number">04 · Projects</span>
                         <h2>Selected work.</h2>
                     </div>
-                    <p class="section-intro">Hands-on explorations in applied AI, explainability, risk modeling, and predictive analytics.</p>
+                    <p class="section-intro">Open-source systems that connect AI architecture, governed analytics, explainability, and financial decision science.</p>
                 </div>
 
                 <div class="projects-grid">
+                    <article class="project glass reveal" style="--accent: #ec8797;">
+                        <p class="project-tag">Flagship · Governed AI Architecture</p>
+                        <h3>FinSight: Governed Analytics Agent</h3>
+                        <p>An open-source, local-first analytics agent that converts portfolio questions into governed plans, policy-validated SQL, human-approved read-only execution, grounded insights, and a complete audit trace.</p>
+                        <div class="project-proof" aria-label="FinSight verification results">
+                            <span><strong>25 / 25</strong><small>Benchmark</small></span>
+                            <span><strong>27 / 27</strong><small>Tests</small></span>
+                            <span><strong>85%</strong><small>Coverage</small></span>
+                            <span><strong>Zero</strong><small>Required API keys</small></span>
+                        </div>
+                        <div class="tech"><span>Python</span><span>Streamlit</span><span>DuckDB</span><span>SQLGlot</span><span>Pydantic</span><span>Ollama</span></div>
+                        <a class="project-link" href="https://github.com/icedarkness/finsight-governed-analytics-agent" target="_blank" rel="noopener noreferrer">Explore FinSight on GitHub <span aria-hidden="true">→</span></a>
+                    </article>
+
                     <article class="project glass reveal" style="--accent: #67e8f9;">
-                        <p class="project-tag">Featured · Agentic AI</p>
+                        <p class="project-tag">Agentic AI</p>
                         <h3>Autonomous Job Search Agent</h3>
                         <p>A locally hosted recruiting assistant that gathers opportunities and uses Gemini to evaluate fit against a personal career profile.</p>
                         <div class="tech"><span>Gemini</span><span>JobSpy</span><span>Python</span></div>
